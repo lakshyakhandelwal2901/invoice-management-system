@@ -10,8 +10,14 @@
   "files": [
     "dist",
     "dist-electron",
-    "node_modules",
-    "prisma"
+    "node_modules/.prisma/**/*",
+    "node_modules/@prisma/client/**/*",
+    "prisma/**/*"
+  ],
+  "asarUnpack": [
+    "node_modules/.prisma/**/*",
+    "node_modules/@prisma/client/**/*",
+    "prisma/**/*"
   ],
   "mac": {
     "target": [
