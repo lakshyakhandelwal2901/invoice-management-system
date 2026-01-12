@@ -1,9 +1,12 @@
 import { app, BrowserWindow } from 'electron'
-import { PrismaClient } from '@prisma/client'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import fs from 'node:fs'
 import path from 'node:path'
+import type { PrismaClient as PrismaClientType } from '@prisma/client'
 
+const require = createRequire(import.meta.url)
+const { PrismaClient } = require('@prisma/client') as typeof import('@prisma/client')
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // The built directory structure
@@ -25,7 +28,7 @@ export const RENDERER_DIST = path.join(process.env.APP_ROOT, 'dist')
 process.env.VITE_PUBLIC = VITE_DEV_SERVER_URL ? path.join(process.env.APP_ROOT, 'public') : RENDERER_DIST
 
 let win: BrowserWindow | null
-let prisma: PrismaClient | null = null
+let prisma: PrismaClientType | null = null
 
 function resolveDatabaseUrl() {
   if (process.env.DATABASE_URL) {
@@ -51,7 +54,7 @@ async function initPrisma() {
   resolveDatabaseUrl()
   prisma = new PrismaClient()
   await prisma.$connect()
-  ;(globalThis as unknown as { __PRISMA?: PrismaClient }).__PRISMA = prisma
+  ;(globalThis as unknown as { __PRISMA?: PrismaClientType }).__PRISMA = prisma
 }
 
 function createWindow() {

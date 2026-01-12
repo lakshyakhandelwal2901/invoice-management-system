@@ -11,6 +11,12 @@ export default defineConfig({
       main: {
         // Shortcut of `build.lib.entry`.
         entry: 'electron/main.ts',
+        build: {
+          rollupOptions: {
+            // Keep Prisma out of the bundle so Node can resolve it from node_modules/.prisma at runtime
+            external: ['@prisma/client', '.prisma/client/default'],
+          },
+        },
       },
       preload: {
         // Shortcut of `build.rollupOptions.input`.
