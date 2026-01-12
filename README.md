@@ -1,67 +1,38 @@
-# Invoice Management System (Desktop)
+# Invoice Management System (Python + PySide6)
 
-Offline-first desktop app to create, send, and track invoices. Built with Electron, React, and SQLite (via Prisma) so everything runs locally without a server.
+A lightweight desktop invoice manager with PySide6 UI, SQLite (SQLAlchemy), and PyInstaller packaging.
 
-## Tech stack
+## Features
+- Dark themed UI with sidebar nav (Dashboard, Invoices, Clients)
+- Create invoices with line items (quick text entry)
+- Track totals and payment status
+- Add clients quickly
+- SQLite local storage
 
-- Electron + Vite + React + TypeScript
-- Prisma + SQLite (local database stored on disk)
-- Electron Builder for packaging (macOS dmg, Windows nsis, Linux AppImage)
-
-## Features planned
-
-- Invoice lifecycle: draft → sent → partial/paid → overdue
-- Client management with linked invoices
-- Payment tracking (partial payments, remaining balance)
-- Share/export: email/WhatsApp/link, PDF, print
-- Dashboard snapshots and filters; invoice-focused reports
-- Reminders for overdue/upcoming due invoices
-
-## Getting started
-
-Prerequisites: Node 18+ and npm.
-
+## Quick Start
 ```bash
-npm install
-npm run dev
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
+pip install -r requirements.txt
+python app.py
 ```
 
-`npm run dev` starts Vite and launches Electron with hot reload for renderer and main processes.
-
-### Database (Prisma + SQLite)
-
-- Schema: prisma/schema.prisma
-- Local database: prisma/dev.db (development)
-
-Commands:
-
+## Build Windows exe (from Windows)
 ```bash
-npm run prisma:migrate   # create/apply migrations
-npm run prisma:generate  # regenerate Prisma Client
+pip install pyinstaller
+pyinstaller --name "Invoice Management System" --noconfirm --clean \
+  --add-data "app/theme/style.qss;app/theme" \
+  --add-data "app/assets;app/assets" \
+  --hidden-import "babel.numbers" \
+  app.py
+# executable will be in dist/Invoice Management System/
 ```
 
-### Build desktop installers
+## Data location
+- Windows: `%APPDATA%/InvoiceManagementPy/invoice.sqlite`
+- Other: `~/.invoice_management_py/invoice.sqlite`
 
-```bash
-npm run build
-```
-
-Build outputs land in release/<version> (macOS dmg, Windows nsis, Linux AppImage). Product metadata is configured in electron-builder.json5.
-
-### Data location in production
-
-- Development: prisma/dev.db in the repo (SQLite).
-- Packaged app: stored under the OS userData path (e.g., ~/Library/Application Support/Invoice Management System or %APPDATA%/Invoice Management System). The path is set automatically at runtime.
-
-## Project layout
-
-- electron/main.ts – Electron main process + Prisma bootstrapping
-- electron/preload.ts – IPC surface exposed to the renderer
-- src/ – React renderer (UI)
-- prisma/ – Prisma schema and migrations
-
-## Next steps
-
-- Wire IPC routes for CRUD (clients, invoices, payments)
-- Add PDF invoice template and share flows
-- Implement dashboard, search, filters, and reminders
+## Notes
+- Fonts: Uses system fonts; drop a TTF into `app/assets` and load via QFontDatabase if desired.
+- Styling: Edit `app/theme/style.qss` and `app/theme/palette.py`.
+- Migrations: For now uses auto-create tables; add Alembic if you need migrations.
