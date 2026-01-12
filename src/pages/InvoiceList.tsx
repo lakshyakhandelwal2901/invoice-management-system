@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import type { Invoice, Client } from '../types'
+import type { Invoice, Client, InvoiceStatus } from '../types'
 import './InvoiceList.css'
 
 interface InvoiceWithClient extends Invoice {
@@ -20,7 +20,7 @@ export function InvoiceList({ onViewInvoice }: InvoiceListProps) {
     try {
       setLoading(true)
       const data = await window.api.listInvoices({
-        status: statusFilter ? (statusFilter as 'DRAFT' | 'SENT' | 'PARTIALLY_PAID' | 'PAID' | 'OVERDUE') : undefined,
+        status: statusFilter ? (statusFilter as InvoiceStatus) : undefined,
         q: searchQuery || undefined,
       })
       setInvoices(data)

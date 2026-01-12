@@ -26,13 +26,13 @@ export interface InvoiceItem {
   id: number
   invoiceId: number
   description: string
-  quantity: number
-  rate: string | number // Decimal type, can be string
-  taxRate: number | null
-  discount: number | null
+  quantity: string | number // Decimal type
+  rate: string | number // Decimal type
+  taxRate: string | number | null // Decimal type
+  discount: string | number | null // Decimal type
+  lineSubtotal: string | number // Decimal type
+  lineTax: string | number // Decimal type
   lineTotal: string | number // Decimal type
-  createdAt: Date
-  updatedAt: Date
 }
 
 export interface Payment {
@@ -40,14 +40,15 @@ export interface Payment {
   invoiceId: number
   amount: string | number // Decimal type
   date: Date
-  mode: string
+  mode: string | null
   reference: string | null
+  note: string | null
   createdAt: Date
-  updatedAt: Date
 }
 
 export interface Invoice {
   id: number
+  uuid: string
   number: string
   clientId: number
   status: InvoiceStatus
@@ -62,7 +63,6 @@ export interface Invoice {
   balance: string | number // Decimal type
   notes: string | null
   terms: string | null
-  sentAt: Date | null
   createdAt: Date
   updatedAt: Date
 }

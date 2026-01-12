@@ -22,7 +22,7 @@ declare namespace NodeJS {
 }
 
 // Used in Renderer process, expose in `preload.ts`
-import type { Client, Invoice, Payment, InvoiceItem, InvoiceStatus } from '@prisma/client'
+import type { Client, Invoice, Payment, InvoiceItem, InvoiceStatus } from '../src/types'
 
 declare global {
   interface Window {

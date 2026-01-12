@@ -2,16 +2,20 @@
 {
   "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "com.invoice.management.desktop",
-  "asar": false,
+  "asar": true,
+  "asarUnpack": [
+    "**/.prisma/**",
+    "**/@prisma/**"
+  ],
   "productName": "Invoice Management System",
   "directories": {
     "output": "release/${version}"
   },
   "files": [
-    "dist",
-    "dist-electron",
-    "node_modules",
-    "prisma"
+    "dist/**",
+    "dist-electron/**",
+    "node_modules/**",
+    "prisma/**"
   ],
   "mac": {
     "target": [
