@@ -1,0 +1,208 @@
+.client-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.clients-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.clients-count {
+  margin: 0;
+  color: #aebcda;
+  font-size: 14px;
+}
+
+.btn-new-client {
+  padding: 10px 18px;
+  background: linear-gradient(135deg, #61c1ff, #3a60ff);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-new-client:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(97, 193, 255, 0.3);
+}
+
+.clients-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.client-card {
+  background: linear-gradient(135deg, rgba(97, 193, 255, 0.12), rgba(58, 96, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: all 0.2s;
+}
+
+.client-card:hover {
+  border-color: rgba(154, 195, 255, 0.4);
+  background: linear-gradient(135deg, rgba(97, 193, 255, 0.18), rgba(58, 96, 255, 0.12));
+}
+
+.client-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: #f6f8ff;
+}
+
+.client-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+}
+
+.detail-label {
+  color: #7a8aa8;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-weight: 600;
+}
+
+.detail span:last-child {
+  color: #dfe8ff;
+}
+
+.client-date {
+  margin-top: 6px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #7a8aa8;
+  font-size: 12px;
+}
+
+.clients-empty {
+  padding: 40px 20px;
+  text-align: center;
+  color: #aebcda;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px dashed rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.clients-loading {
+  padding: 40px;
+  text-align: center;
+  color: #aebcda;
+}
+
+.client-form-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 500px;
+}
+
+.client-form-card h3 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f6f8ff;
+}
+
+.client-form-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.client-form-card .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.client-form-card label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #aebcda;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.client-form-card input {
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #e6ecff;
+  font-size: 14px;
+}
+
+.client-form-card input:focus {
+  outline: none;
+  border-color: rgba(154, 195, 255, 0.5);
+  background: rgba(154, 195, 255, 0.08);
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-submit,
+.btn-cancel {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #61c1ff, #3a60ff);
+  color: white;
+}
+
+.btn-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(97, 193, 255, 0.3);
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-cancel {
+  background: rgba(255, 255, 255, 0.06);
+  color: #aebcda;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+  .clients-grid {
+    grid-template-columns: 1fr;
+  }
+}
