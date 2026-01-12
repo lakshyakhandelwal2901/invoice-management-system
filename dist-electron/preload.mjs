@@ -1,1 +1,40 @@
-"use strict";const n=require("electron");n.contextBridge.exposeInMainWorld("ipcRenderer",{on(...e){const[i,r]=e;return n.ipcRenderer.on(i,(c,...t)=>r(c,...t))},off(...e){const[i,...r]=e;return n.ipcRenderer.off(i,...r)},send(...e){const[i,...r]=e;return n.ipcRenderer.send(i,...r)},invoke(...e){const[i,...r]=e;return n.ipcRenderer.invoke(i,...r)}});n.contextBridge.exposeInMainWorld("api",{listClients:()=>n.ipcRenderer.invoke("clients:list"),createClient:e=>n.ipcRenderer.invoke("clients:create",e),updateClient:(e,i)=>n.ipcRenderer.invoke("clients:update",e,i),getClient:e=>n.ipcRenderer.invoke("clients:get",e),listInvoices:e=>n.ipcRenderer.invoke("invoices:list",e),getInvoice:e=>n.ipcRenderer.invoke("invoices:get",e),createInvoice:e=>n.ipcRenderer.invoke("invoices:create",e),updateInvoice:(e,i)=>n.ipcRenderer.invoke("invoices:update",e,i),duplicateInvoice:e=>n.ipcRenderer.invoke("invoices:duplicate",e),sendInvoice:e=>n.ipcRenderer.invoke("invoices:send",e),addPayment:e=>n.ipcRenderer.invoke("payments:add",e),dashboardSnapshot:()=>n.ipcRenderer.invoke("dashboard:snapshot")});
+"use strict";
+const electron = require("electron");
+electron.contextBridge.exposeInMainWorld("ipcRenderer", {
+  on(...args) {
+    const [channel, listener] = args;
+    return electron.ipcRenderer.on(channel, (event, ...args2) => listener(event, ...args2));
+  },
+  off(...args) {
+    const [channel, ...omit] = args;
+    return electron.ipcRenderer.off(channel, ...omit);
+  },
+  send(...args) {
+    const [channel, ...omit] = args;
+    return electron.ipcRenderer.send(channel, ...omit);
+  },
+  invoke(...args) {
+    const [channel, ...omit] = args;
+    return electron.ipcRenderer.invoke(channel, ...omit);
+  }
+  // You can expose other APTs you need here.
+  // ...
+});
+electron.contextBridge.exposeInMainWorld("api", {
+  // Clients
+  listClients: () => electron.ipcRenderer.invoke("clients:list"),
+  createClient: (data) => electron.ipcRenderer.invoke("clients:create", data),
+  updateClient: (id, data) => electron.ipcRenderer.invoke("clients:update", id, data),
+  getClient: (id) => electron.ipcRenderer.invoke("clients:get", id),
+  // Invoices
+  listInvoices: (args) => electron.ipcRenderer.invoke("invoices:list", args),
+  getInvoice: (id) => electron.ipcRenderer.invoke("invoices:get", id),
+  createInvoice: (data) => electron.ipcRenderer.invoke("invoices:create", data),
+  updateInvoice: (id, data) => electron.ipcRenderer.invoke("invoices:update", id, data),
+  duplicateInvoice: (id) => electron.ipcRenderer.invoke("invoices:duplicate", id),
+  sendInvoice: (id) => electron.ipcRenderer.invoke("invoices:send", id),
+  // Payments
+  addPayment: (data) => electron.ipcRenderer.invoke("payments:add", data),
+  // Dashboard
+  dashboardSnapshot: () => electron.ipcRenderer.invoke("dashboard:snapshot")
+});

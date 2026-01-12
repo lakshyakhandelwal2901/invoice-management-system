@@ -49,18 +49,6 @@ function resolveDatabaseUrl() {
 
 async function initPrisma() {
   resolveDatabaseUrl()
-  
-  // Set Prisma binary path for packaged app
-  if (app.isPackaged) {
-    const prismaPath = path.join(process.resourcesPath, 'app.asar.unpacked', 'node_modules', '.prisma', 'client')
-    process.env.PRISMA_QUERY_ENGINE_LIBRARY = path.join(
-      prismaPath,
-      process.platform === 'win32' ? 'query_engine-windows.dll.node' : 
-      process.platform === 'darwin' ? 'libquery_engine-darwin.dylib.node' : 
-      'libquery_engine-linux-gnu.so.node'
-    )
-  }
-  
   prisma = new PrismaClient()
   await prisma.$connect()
   ;(globalThis as unknown as { __PRISMA?: PrismaClient }).__PRISMA = prisma
