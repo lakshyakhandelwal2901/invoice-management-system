@@ -9,7 +9,9 @@
   },
   "files": [
     "dist",
-    "dist-electron"
+    "dist-electron",
+    "node_modules",
+    "prisma"
   ],
   "mac": {
     "target": [
