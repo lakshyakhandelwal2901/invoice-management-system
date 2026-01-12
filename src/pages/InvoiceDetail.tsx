@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import type { Invoice, InvoiceItem, Payment, Client } from '@prisma/client'
+import type { Invoice, InvoiceItem, Payment, Client } from '../types'
 import './InvoiceDetail.css'
 
 interface InvoiceDetailProps {

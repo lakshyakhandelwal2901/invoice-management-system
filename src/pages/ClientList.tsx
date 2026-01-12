@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import type { Client } from '@prisma/client'
+import { useEffect, useState } from 'react'
+import type { Client } from '../types'
 import './ClientList.css'
 
 export function ClientList() {
